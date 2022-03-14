@@ -1,28 +1,18 @@
-import { useRef, useState, useEffect } from "react"
-import { debounce } from "lodash"
+import { useEffect, useState } from "react"
+
 import "/src/index.css"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../ReduxStore/store"
 import { useQuery } from "react-query"
-import { Profile, ProfileState } from "../Models/profile"
-import { search } from "../Services/githubApi"
+import { Profile, ProfileState, ContainerProps } from "../ReduxStore/profile"
+import { setSelectedProfile } from "../ReduxStore/profileSlice"
+import React from "react"
+import useDebounce from "./useDebounce"
+import { Container } from "./debounceContainer"
 
 export default function Search() {
-	const profiles = useSelector((state: RootState) => state.profiles)
-	const dispatch = useDispatch()
-
-	const debouncedSearch = debounce((criteria: string) => {
-		useQuery<Profile[]>(`profile`, () => search(criteria))
-	}, 300)
-
-	useEffect(() => {
-		return () => {
-			debouncedSearch.cancel()
-		}
-	}, [debouncedSearch])
-
 	async function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-		debouncedSearch(e.target.value)
+		Container(e.target.value as unknown as ContainerProps)
 	}
 
 	return (
@@ -35,7 +25,6 @@ export default function Search() {
 					onChange={handleChange}
 				/>
 			</div>
-			C
 		</div>
 	)
 }
