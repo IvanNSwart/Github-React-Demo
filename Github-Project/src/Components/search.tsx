@@ -1,22 +1,26 @@
 import { useRef, useState, useEffect } from "react"
 import { debounce } from "lodash"
 import "/src/index.css"
-import { Profile } from "../Models/profile"
+import { useDispatch, useSelector } from "react-redux"
+import { RootState } from "../ReduxStore/store"
+import { useQuery } from "react-query"
+import { Profile, ProfileState } from "../Models/profile"
 
 export default function Search() {
-	const [profiles, setProfiles] = useState<Profile[]>([])
+	const profiles = useSelector((state: RootState) => state.profiles)
+	const dispatch = useDispatch()
+	const [testProfiles, setTestProfiles] = useState<string[]>([])
 
 	async function search(criteria: string) {
 		const response = await fetch(
 			`https://api.github.com/users/${criteria}`
 		)
-		const body: Profile = await response.json()
-		return body.login
+		const body = await response.json()
+		return body.results.map((result: Profile) => result.login)
 	}
-
 	const debouncedSearch = useRef(
 		debounce(async (criteria: string) => {
-			setProfiles(await search(criteria))
+			setTestProfiles(await search(criteria))
 		}, 300)
 	).current
 
@@ -36,13 +40,12 @@ export default function Search() {
 				<input
 					className=" m-10 w-3/6  shadow appearance-none border border-slate-500 rounded  py-2 px-3 text-gray-700 leading-tight "
 					type="search"
-					placeholder="Enter your search"
+					placeholder="Search an Github User"
 					onChange={handleChange}
 				/>
 			</div>
-
 			<ul className="m-10 flex justify-center">
-				{profiles.map((profile) => (
+				{testProfiles.map((profile) => (
 					<li
 						className="bg-green-300 m-2 rounded-lg px-2"
 						key={profile}

@@ -31,4 +31,19 @@ export interface Profile {
 	following: number
 	created_at: string
 	updated_at: string
+	status: ProfileState
+}
+export enum ProfileState {
+	SELECTED = "selected",
+	NOTSELECTED = "not selected",
+}
+
+export enum ProfileAction {
+	SET_SELECTED = "SET_SELECTED",
+	ADD_TO_SEARCH = "ADD_TO_SEARCH",
+}
+
+export type ActionTypes = {
+	type: typeof ProfileAction.SET_SELECTED
+	payload: { status: ProfileState; login: string }
 }
