@@ -2,13 +2,18 @@ import "./App.css";
 import { Rstore } from "./ReduxStore/store";
 import { Provider } from "react-redux";
 import Search from "./Components/search";
+import { QueryClientProvider, QueryClient } from "react-query";
 
+const queryClient = new QueryClient();
 function App() {
 	return (
 		<div>
-			<Provider store={Rstore}>
-				<Search />
-			</Provider>
+			<QueryClientProvider client={queryClient}>
+				<Provider store={Rstore}>
+					<Search />
+				</Provider>
+			</QueryClientProvider>
+
 			<div className="bg-slate-100">
 				<div className="container flex mx-auto px-3 bg-slate-100 h-full">
 					<div className="container px-3 w-80">

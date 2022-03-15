@@ -1,16 +1,22 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../ReduxStore/store";
+import { useState } from "react";
+import { useQuery } from "react-query";
+import { searchUser } from "../Services/githubApi";
+import useDebounce from "./useDebounce";
+
+function searchQuery(searchCriteria: string) {
+	return useQuery(
+		["query", searchCriteria],
+		() => searchUser(searchCriteria),
+		{
+			enabled: !!searchCriteria,
+		}
+	);
+}
 
 export default function Search() {
-	const profiles = useSelector((state: RootState) => state.profiles);
-	const dispatch = useDispatch();
+	const [searchCriteria, setSearchCriteria] = useState("");
 
-	// function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-	// 	Container(e.target.value as unknown as ContainerProps);
-	// 	const searchcriteria = e.target.value;
-	// 	dispatch(addToSearch(...profiles, searchcriteria));
-	// }
+	searchQuery(useDebounce(searchCriteria, 500));
 
 	return (
 		<div className="flex items-center justify-center">
@@ -18,7 +24,7 @@ export default function Search() {
 				className=" m-10 w-3/6  shadow appearance-none border border-slate-500 rounded  py-2 px-3 text-gray-700 leading-tight "
 				type="search"
 				placeholder="Search an Github User"
-				// onChange={handleChange}
+				onChange={(e) => setSearchCriteria(e.target.value)}
 			/>
 		</div>
 	);
