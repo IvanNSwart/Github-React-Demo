@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
-import { ContainerProps, Profile, ProfileState } from "../ReduxStore/profile";
+import { ContainerProps, Profile, ProfileState } from "../ReduxStore/types";
 import { setSelectedProfile } from "../ReduxStore/profileSlice";
 import { RootState } from "../ReduxStore/store";
 import useDebounce from "./useDebounce";

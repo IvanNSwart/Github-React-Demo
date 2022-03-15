@@ -1,6 +1,4 @@
-import { useQuery } from "react-query";
-import { IProfile } from "../Models/profiles";
-import { Profile } from "../ReduxStore/profile";
+import { Profile } from "../ReduxStore/types";
 
 export function search(criteria: string): Promise<Profile> {
 	const response = fetch(`https://api.github.com/users/${criteria}`)

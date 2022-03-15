@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Profile, ProfileState } from "./profile";
+import { Profile, ProfileState } from "./types";
 import { RootState } from "./store";
 
 const initialState: Profile[] = [];
@@ -11,38 +11,7 @@ export const profileSlice = createSlice({
 		addToSearch: (state, action: PayloadAction<Profile>) => [
 			...state,
 			{
-				login: action.payload.login,
-				id: action.payload.id,
-				node_id: action.payload.node_id,
-				avatar_url: action.payload.avatar_url,
-				gravatar_id: action.payload.gravatar_id,
-				url: action.payload.url,
-				html_url: action.payload.html_url,
-				followers_url: action.payload.followers_url,
-				following_url: action.payload.following_url,
-				gists_url: action.payload.gists_url,
-				starred_url: action.payload.starred_url,
-				subscriptions_url: action.payload.subscriptions_url,
-				organizations_url: action.payload.organizations_url,
-				repos_url: action.payload.repos_url,
-				events_url: action.payload.events_url,
-				received_events_url: action.payload.received_events_url,
-				type: action.payload.type,
-				site_admin: action.payload.site_admin,
-				name: action.payload.name,
-				company: action.payload.company,
-				blog: action.payload.blog,
-				location: action.payload.location,
-				email: action.payload.email,
-				hireable: action.payload.hireable,
-				bio: action.payload.bio,
-				twitter_username: action.payload.twitter_username,
-				public_repos: action.payload.public_repos,
-				public_gists: action.payload.public_gists,
-				followers: action.payload.followers,
-				following: action.payload.following,
-				created_at: action.payload.created_at,
-				updated_at: action.payload.updated_at,
+				...action.payload,
 				status: ProfileState.NOTSELECTED,
 			},
 		],
