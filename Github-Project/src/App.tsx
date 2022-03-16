@@ -15,7 +15,7 @@ function App() {
 			</QueryClientProvider>
 
 			<div className="bg-slate-100">
-				<div className="container flex mx-auto px-3 bg-slate-100 h-full">
+				<div className="container flex ml-20 mr-12 px-3 bg-slate-100 h-full">
 					<div className="container px-3 w-80">
 						<img
 							src="https://source.unsplash.com/random?Person"
