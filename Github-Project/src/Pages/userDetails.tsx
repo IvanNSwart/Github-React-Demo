@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import { Profile } from "../ReduxStore/types";
 import { searchUser } from "../Services/githubApi";
-import Repos from "./displayRepos";
+import Repos from "../Components/displayRepos";
 import { Link, useParams } from "react-router-dom";
 import twitter from "../Assets/imgs/twitter.jpeg";
 import { GoLocation } from "react-icons/go";

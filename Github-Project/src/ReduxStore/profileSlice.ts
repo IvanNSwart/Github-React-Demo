@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Profile, ProfileState } from "./types";
-import { RootState } from "./store";
 
 const initialState: Profile[] = [
 	{

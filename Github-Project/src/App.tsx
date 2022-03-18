@@ -4,8 +4,7 @@ import { Provider } from "react-redux";
 import Search from "./Pages/homeSearch";
 import { QueryClientProvider, QueryClient } from "react-query";
 import DisplayUser from "./Pages/userDetails";
-import Repos from "./Pages/displayRepos";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 const queryClient = new QueryClient();
 function App() {

@@ -1,6 +1,5 @@
 import { Profile, rootRepo } from "../ReduxStore/types";
 import axios from "axios";
-import { loadPlugin } from "immer/dist/internal";
 export const getRepos = async (login: string) =>
 	await axios
 		.get<rootRepo[]>(`https://api.github.com/users/${login}/repos`)
