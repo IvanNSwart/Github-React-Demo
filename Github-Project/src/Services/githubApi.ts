@@ -1,14 +1,12 @@
-import { Profile, RootRepo } from "../ReduxStore/types";
+import { Profile, rootRepo } from "../ReduxStore/types";
+import axios from "axios";
+import { loadPlugin } from "immer/dist/internal";
+export const getRepos = async (login: string) =>
+	await axios
+		.get<rootRepo[]>(`https://api.github.com/users/${login}/repos`)
+		.then((res) => res.data);
 
-export function searchUser(criteria: string): Promise<Profile[]> {
-	const response = fetch(`https://api.github.com/users/${criteria}`)
-		.then((res) => res.json())
+export const searchUser = async (login: string) =>
+	await axios
+		.get<Profile>(`https://api.github.com/users/${login}`)
 		.then((res) => res.data);
-	return response;
-}
-export function getRepos(criteria: string): Promise<RootRepo> {
-	const response = fetch(`https://api.github.com/users/${criteria}/repos`)
-		.then((res) => res.json())
-		.then((res) => res.data);
-	return response;
-}
