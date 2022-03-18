@@ -31,7 +31,6 @@ export type Profile = {
 	following: number;
 	created_at: string;
 	updated_at: string;
-	status: ProfileState;
 };
 export enum ProfileState {
 	SELECTED = "selected",
@@ -44,11 +43,11 @@ export enum ProfileAction {
 }
 
 export type ActionTypes = {
-	type: typeof ProfileAction.SET_SELECTED;
-	payload: { status: ProfileState; login: string };
+	type: typeof ProfileAction.ADD_TO_SEARCH;
+	payload: Profile;
 };
 
-export type RootRepo = {
+export type rootRepo = {
 	id: number;
 	node_id: string;
 	name: string;
