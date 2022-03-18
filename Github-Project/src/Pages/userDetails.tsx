@@ -2,7 +2,10 @@ import { useQuery } from "react-query";
 import { Profile } from "../ReduxStore/types";
 import { searchUser } from "../Services/githubApi";
 import Repos from "./displayRepos";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import twitter from "../Assets/imgs/twitter.jpeg";
+import { GoLocation } from "react-icons/go";
+import { BsLink45Deg } from "react-icons/bs";
 
 export default function DisplayUser() {
 	const { login } = useParams();
@@ -15,8 +18,12 @@ export default function DisplayUser() {
 	).data;
 	return (
 		<>
-			<div className="bg-slate-100">
-				<div className="container flex ml-20 mr-12 px-3 bg-slate-100 h-screen">
+			<div className="bg-slate-100 min-h-screen max-h-screen bg-cover bg-center ">
+				<div className="flex justify-center bg-slate-700 text-white py-6">
+					<Link to={`/`}>Back to Search</Link>
+				</div>
+
+				<div className="container flex ml-20 mr-12 px-3 bg-slate-100 ">
 					<div className="container px-3 w-80">
 						<img
 							src={displayData?.avatar_url}
@@ -27,39 +34,48 @@ export default function DisplayUser() {
 							{displayData?.name}
 						</div>
 						<div className="font-light text-sm pb-4">
-							{displayData?.login}
+							@{displayData?.login}
 						</div>
 						<div className="mb-4">{displayData?.bio}</div>
 						<a
-							href={`www.twitter.com/${displayData?.twitter_username}`}
+							href={`http://twitter.com/${displayData?.twitter_username}`}
 						>
 							<img
-								src="./src/Assets/imgs/twitter.jpeg"
+								src={twitter}
 								alt="Logo"
-								className=" h-8 w-8 mt-10 mb-8 mr-48 rounded-full object-cover"
+								className=" h-8 w-8 mt-6 mb-8 mr-48 rounded-full object-cover"
 							/>
 						</a>
 						<button className="flex justify-center bg-slate-700 text-white p-4 w-60 rounded-lg">
-							Follow
+							<a
+								href={`https://github.com/${displayData?.login}`}
+							>
+								{" "}
+								Follow
+							</a>
 						</button>
-						<p className="gap-10 text-md pt-4">
-							Location: {displayData?.location}
+						<p className="gap-2 text-md pt-4 flex justify-items-start mt-6 ">
+							<GoLocation /> {displayData?.location}
 						</p>
-						<p className="text-md mb-80">
-							Organisation: {displayData?.company}
+						<p className=" gap-2 text-md mb-80 mt-2 flex justify-items-start">
+							<BsLink45Deg /> {displayData?.company}
 						</p>
 					</div>
 					<div className="container">
-						<div className="flex justify-start mt-16">
-							<p className="font-bold text-2xl gap-10 ">
+						<div className="grid grid-cols-3 mt-16">
+							<p className="font-bold text-2xl ml-24 ">
 								Projects
 							</p>
-							<p className="text-bold text-sm mt-2">
-								Following: {displayData?.following}
-							</p>
-							<p className="text-bold text-sm mt-2">
-								Folowers: {displayData?.followers}
-							</p>
+							<div className="col-span-2 flex justify-end">
+								<p className="text-bold text-sm mt-2 mr-3">
+									<b>Following: </b>
+									{displayData?.following}
+								</p>
+								<p className="text-bold text-sm mt-2 mr-24">
+									<b>Folowers: </b>
+									{displayData?.followers}
+								</p>
+							</div>
 						</div>
 						<Repos topic={login} />
 					</div>
