@@ -6,6 +6,16 @@ import { Link, useParams } from "react-router-dom";
 import twitter from "../Assets/imgs/twitter.jpeg";
 import { GoLocation } from "react-icons/go";
 import { BsLink45Deg } from "react-icons/bs";
+import Paper from "@mui/material/Paper";
+import {
+	Chart,
+	BarSeries,
+	Title,
+	ArgumentAxis,
+	ValueAxis,
+} from "@devexpress/dx-react-chart-material-ui";
+import { Animation } from "@devexpress/dx-react-chart";
+import { useState } from "react";
 
 export default function DisplayUser() {
 	const { login } = useParams();
@@ -16,11 +26,32 @@ export default function DisplayUser() {
 			enabled: !!login && login !== "",
 		}
 	).data;
+	const [chartData, setChartData] = useState([
+		{
+			Name: "Followers",
+			Followers: displayData?.followers!,
+		},
+	]);
 	return (
 		<>
-			<div className="bg-slate-100 h-screen bg-cover bg-center ">
+			<div className="bg-slate-100 bg-cover bg-center ">
 				<div className="flex justify-center bg-slate-700 text-white py-6">
 					<Link to={`/`}>Back to Search</Link>
+				</div>
+				<div>
+					<Paper>
+						<Chart data={chartData} rotated>
+							<ArgumentAxis />
+							<ValueAxis />
+
+							<BarSeries
+								valueField="Followers"
+								argumentField="Name"
+							/>
+							<Title text="Total Followers" />
+							<Animation />
+						</Chart>
+					</Paper>
 				</div>
 
 				<div className="container flex ml-20 mr-12 px-3 bg-slate-100 ">

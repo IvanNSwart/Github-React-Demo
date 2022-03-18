@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../ReduxStore/store";
 import { rootRepo } from "../ReduxStore/types";
 import { getRepos } from "../Services/githubApi";
-import eachRepo from "./Repos";
+import eachRepo from "../Components/Repos";
 
 export default function Repos(props: any) {
 	const login = props.topic;
