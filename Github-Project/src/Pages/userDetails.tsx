@@ -18,7 +18,7 @@ export default function DisplayUser() {
 	).data;
 	return (
 		<>
-			<div className="bg-slate-100 min-h-screen max-h-screen bg-cover bg-center ">
+			<div className="bg-slate-100 h-screen bg-cover bg-center ">
 				<div className="flex justify-center bg-slate-700 text-white py-6">
 					<Link to={`/`}>Back to Search</Link>
 				</div>
@@ -77,11 +77,12 @@ export default function DisplayUser() {
 								</p>
 							</div>
 						</div>
-						<Repos topic={login} />
+						<div className="overflow-auto h-screen">
+							<Repos topic={login} />
+						</div>
 					</div>
 				</div>
 			</div>
-			)
 		</>
 	);
 }
